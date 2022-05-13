@@ -51,17 +51,11 @@ function wagesEarnedOnDate(employee, date){
 }
 
 function allWagesFor(employee){
-    let total = 0
-    employee.timeInEvents.map(day => {
-        total += wagesEarnedOnDate(employee, day.date)
-    })
-    return total
+    const dates = employee.timeInEvents.map(day => wagesEarnedOnDate(employee, day.date))
+    return dates.reduce((current, initial) => current + initial)
 }
 
 function calculatePayroll(employeeRecords){
-    let total = 0
-    employeeRecords.map(employee => {
-        total += allWagesFor(employee)
-    })
-    return total
+    const employeesPay = employeeRecords.map(employee => allWagesFor(employee))
+    return employeesPay.reduce((current, initial) => current + initial)
 }
